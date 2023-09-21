@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Categorías</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let categoria of categorias">
+      <div *ngIf="!categoriaEditar || categoriaEditar.id !== categoria.id">
+        {{ categoria.nombre }}
+        <button class="btn btn-primary btn-sm float-right ml-2" (click)="editarCategoria(categoria)">Editar</button>
+        <button class="btn btn-danger btn-sm float-right" (click)="borrarCategoria(categoria.id)">Eliminar</button>
+      </div>
+      <div *ngIf="categoriaEditar && categoriaEditar.id === categoria.id">
+        <input [(ngModel)]="categoriaEditar.nombre" required>
+        <button class="btn btn-success btn-sm ml-2" (click)="guardarEdicion()">Guardar</button>
+        <button class="btn btn-secondary btn-sm ml-2" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </li>
+  </ul>
+
+  <h3>Agregar Nueva Categoría</h3>
+  <form (submit)="agregarCategoria()">
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="nuevaCategoria.nombre" name="nombre"
+             placeholder="Nombre de la categoría" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+  </form>
+</div>
